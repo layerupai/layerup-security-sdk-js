@@ -43,6 +43,19 @@ class FunctionManager {
 			return { error };
 		}
 	}
+
+	async logError(error, messages, metadata) {
+		try {
+			const response = await this.apiClient.request({
+				method: 'post',
+				url: '/log/error',
+				data: JSON.stringify({ error, messages, metadata }),
+			});
+			return response;
+		} catch (error) {
+			return { error };
+		}
+	}
 }
 
 module.exports = FunctionManager;

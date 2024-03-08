@@ -79,6 +79,10 @@ class LayerupSecurity {
 
 		return [maskedResponse.messages, unmaskResponse];
 	}
+
+	async logError(error, messages, metadata) {
+		return await this.functionManager.logError(error, messages, metadata);
+	}
 }
 
 module.exports = LayerupSecurity;
