@@ -30,6 +30,19 @@ class FunctionManager {
 			return { error };
 		}
 	}
+
+	async maskPrompt(messages, metadata) {
+		try {
+			const response = await this.apiClient.request({
+				method: 'post',
+				url: '/mask/prompt',
+				data: JSON.stringify({ messages, metadata }),
+			});
+			return response;
+		} catch (error) {
+			return { error };
+		}
+	}
 }
 
 module.exports = FunctionManager;
