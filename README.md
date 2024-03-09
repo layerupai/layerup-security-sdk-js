@@ -69,3 +69,33 @@ if (!securityResponse.all_safe) {
 	console.log('All safe - continuing...');
 }
 ```
+
+### Mask Prompts
+
+Mask sensitive information in your prompts before sending them to an LLM.
+
+```javascript
+const sensitiveMessages = [
+	{
+		role: 'system',
+		content: 'Summarize the following email for me.',
+	},
+	{
+		role: 'user',
+		content:
+			'Dear Mr. Smith, hope you are doing well. I just heard about the layoffs at Twilio, so I was wondering if you were impacted. Can you please call me back at your earliest convenience? My number is (123) 456-7890. Best Regards, Bob Dylan',
+	},
+];
+
+// Make the call to Layerup
+let [messages, unmaskResponse] = await layerup.maskPrompt(sensitiveMessages);
+
+// Call OpenAI using the masked messages from Layerup
+const result = await openai.chat.completions.create({
+	messages,
+	model: 'gpt-3.5-turbo',
+});
+
+// Unmask the mesasges using the provided unmask function
+const unmaskedResult = unmaskResponse(result);
+```
