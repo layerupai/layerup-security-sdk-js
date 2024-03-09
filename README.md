@@ -99,3 +99,25 @@ const result = await openai.chat.completions.create({
 // Unmask the mesasges using the provided unmask function
 const unmaskedResult = unmaskResponse(result);
 ```
+
+### Log Errors
+
+Log LLM errors in order to seamlessly view insights as to why your LLM calls are failing or timing out, trace errors, and identify patterns.
+
+```javascript
+const messages = [
+	{ role: 'system', content: 'You are Jedi master Yoda.' },
+	{ role: 'user', content: "What is Luke Skywalker's favorite fruit?" },
+];
+
+try {
+	// Send your request
+	await openai.chat.completions.create({
+		messages,
+		model: 'gpt-3.5-turbo',
+	});
+} catch (error) {
+	// Log error using Layerup error logging
+	layerup.logError(error, messages);
+}
+```
