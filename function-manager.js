@@ -56,6 +56,19 @@ class FunctionManager {
 			return { error };
 		}
 	}
+
+	async executeRules(rules, messages, metadata) {
+		try {
+			const response = await this.apiClient.request({
+				method: 'post',
+				url: '/rules/execute',
+				data: JSON.stringify({ rules, messages, metadata }),
+			});
+			return response;
+		} catch (error) {
+			return { error };
+		}
+	}
 }
 
 module.exports = FunctionManager;

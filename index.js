@@ -83,6 +83,10 @@ class LayerupSecurity {
 	async logError(error, messages, metadata) {
 		return await this.functionManager.logError(error, messages, metadata);
 	}
+
+	async executeRules(rules, messages, metadata) {
+		return await this.functionManager.executeRules(rules, messages, metadata);
+	}
 }
 
 module.exports = LayerupSecurity;
