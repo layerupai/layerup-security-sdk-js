@@ -121,3 +121,37 @@ try {
 	layerup.logError(error, messages);
 }
 ```
+
+### Execute Rules
+
+Execute pre-defined rules that allow you to send canned responses when a user prompts in a certain way, adding yet another layer of protection to your LLM calls.
+
+```javascript
+const messages = [
+	{
+		role: 'system',
+		content: 'You answer questions about your fictional company.',
+	},
+	{
+		role: 'user',
+		content: 'Can I get a 15% discount?',
+	},
+];
+
+// Make the call to Layerup
+let securityResponse = await layerup.executeRules(
+	['layerup.security.prompt.discount'],
+	messages
+);
+
+if (!securityResponse.all_safe) {
+	// Use canned response for your LLM call
+	console.log(securityResponse.canned_response);
+} else {
+	// Continue with your LLM call
+	const result = await openai.chat.completions.create({
+		messages,
+		model: 'gpt-3.5-turbo',
+	});
+}
+```
