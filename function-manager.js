@@ -57,12 +57,12 @@ class FunctionManager {
 		}
 	}
 
-	async executeRules(rules, messages, metadata) {
+	async executeGuardrails(guardrails, messages, metadata) {
 		try {
 			const response = await this.apiClient.request({
 				method: 'post',
-				url: '/rules/execute',
-				data: JSON.stringify({ rules, messages, metadata }),
+				url: '/guardrails/execute',
+				data: JSON.stringify({ guardrails, messages, metadata }),
 			});
 			return response;
 		} catch (error) {

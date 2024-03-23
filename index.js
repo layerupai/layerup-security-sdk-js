@@ -84,8 +84,12 @@ class LayerupSecurity {
 		return await this.functionManager.logError(error, messages, metadata);
 	}
 
-	async executeRules(rules, messages, metadata) {
-		return await this.functionManager.executeRules(rules, messages, metadata);
+	async executeGuardrails(guardrails, messages, metadata) {
+		return await this.functionManager.executeGuardrails(
+			guardrails,
+			messages,
+			metadata
+		);
 	}
 }
 

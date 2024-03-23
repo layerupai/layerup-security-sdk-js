@@ -122,9 +122,9 @@ try {
 }
 ```
 
-### Execute Rules
+### Execute Guardrails
 
-Execute pre-defined rules that allow you to send canned responses when a user prompts in a certain way, adding yet another layer of protection to your LLM calls.
+Execute pre-defined guardrails that allow you to send canned responses when a user prompts in a certain way, adding yet another layer of protection to your LLM calls.
 
 ```javascript
 const messages = [
@@ -139,7 +139,7 @@ const messages = [
 ];
 
 // Make the call to Layerup
-let securityResponse = await layerup.executeRules(
+let securityResponse = await layerup.executeGuardrails(
 	['layerup.security.prompt.discount'],
 	messages
 );
