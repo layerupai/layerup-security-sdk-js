@@ -21,52 +21,37 @@ const LayerupSecurity = require('@layerup/layerup-security');
 const layerup = new LayerupSecurity({ apiKey: process.env.LAYERUP_API_KEY });
 ```
 
-### Intercept Prompts
+### Execute Guardrails
 
-Intercept unsafe prompts before they are sent to an LLM.
+Execute pre-defined guardrails that allow you to send canned responses when a user prompts in a certain way, adding a layer of protection to your LLM calls.
 
 ```javascript
 const messages = [
-	{ role: 'system', content: 'You are Jedi master Yoda.' },
-	{ role: 'user', content: "Anakin's social security number is 123-45-6789." },
+	{
+		role: 'system',
+		content: 'You answer questions about your fictional company.',
+	},
+	{
+		role: 'user',
+		content: 'Can I get a 15% discount?',
+	},
 ];
 
 // Make the call to Layerup
-let securityResponse = await layerup.interceptPrompt(messages);
+let securityResponse = await layerup.executeGuardrails(
+	['layerup.security.prompt.discount'],
+	messages
+);
 
 if (!securityResponse.all_safe) {
-	throw new Error('Unsafe prompt provided. Aborting...');
+	// Use canned response for your LLM call
+	console.log(securityResponse.canned_response);
 } else {
+	// Continue with your LLM call
 	const result = await openai.chat.completions.create({
 		messages,
 		model: 'gpt-3.5-turbo',
 	});
-}
-```
-
-### Intercept Responses
-
-Intercept unsafe LLM responses before they get to your users.
-
-```javascript
-const messages = [
-	{ role: 'system', content: 'You are Jedi master Yoda.' },
-	{ role: 'user', content: "What is Luke Skywalker's favorite fruit?" },
-];
-
-const result = await openai.chat.completions.create({
-	messages,
-	model: 'gpt-3.5-turbo',
-});
-messages.push(result.choices[0].message);
-
-// Make the call to Layerup
-let securityResponse = await layerup.interceptResponse(messages);
-
-if (!securityResponse.all_safe) {
-	throw new Error('Unsafe response received from OpenAI. Aborting...');
-} else {
-	console.log('All safe - continuing...');
 }
 ```
 
@@ -119,39 +104,5 @@ try {
 } catch (error) {
 	// Log error using Layerup error logging
 	layerup.logError(error, messages);
-}
-```
-
-### Execute Guardrails
-
-Execute pre-defined guardrails that allow you to send canned responses when a user prompts in a certain way, adding yet another layer of protection to your LLM calls.
-
-```javascript
-const messages = [
-	{
-		role: 'system',
-		content: 'You answer questions about your fictional company.',
-	},
-	{
-		role: 'user',
-		content: 'Can I get a 15% discount?',
-	},
-];
-
-// Make the call to Layerup
-let securityResponse = await layerup.executeGuardrails(
-	['layerup.security.prompt.discount'],
-	messages
-);
-
-if (!securityResponse.all_safe) {
-	// Use canned response for your LLM call
-	console.log(securityResponse.canned_response);
-} else {
-	// Continue with your LLM call
-	const result = await openai.chat.completions.create({
-		messages,
-		model: 'gpt-3.5-turbo',
-	});
 }
 ```

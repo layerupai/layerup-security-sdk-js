@@ -20,14 +20,6 @@ class LayerupSecurity {
 		this.functionManager = new FunctionManager();
 	}
 
-	async interceptPrompt(messages, metadata) {
-		return await this.functionManager.interceptPrompt(messages, metadata);
-	}
-
-	async interceptResponse(messages, metadata) {
-		return await this.functionManager.interceptResponse(messages, metadata);
-	}
-
 	async maskPrompt(messages, metadata) {
 		const maskedResponse = await this.functionManager.maskPrompt(
 			messages,
