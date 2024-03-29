@@ -18,3 +18,8 @@ export type Metadata = {
     customer_scope_rpm?: number;
   };
 } | null;
+
+export type LLMMessage = {
+  role: string;
+  content: string;
+}

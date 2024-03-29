@@ -1,5 +1,5 @@
 import { setAPIKey, setBaseURL } from './config';
-import { Config, MaskedResponse, Metadata } from './types'
+import { Config, LLMMessage, MaskedResponse, Metadata } from './types'
 import FunctionManager from './function-manager';
 
 export class LayerupSecurity {
@@ -29,7 +29,7 @@ export class LayerupSecurity {
 		this.functionManager = new FunctionManager();
 	}
 
-	async maskPrompt(messages: any[], metadata: Metadata): Promise<[any[], (templatedResponse: any) => any]> {
+	async maskPrompt(messages: LLMMessage[], metadata: Metadata): Promise<[LLMMessage[], (templatedResponse: any) => any]> {
 		const maskedResponse: MaskedResponse = await this.functionManager.maskPrompt(
 			messages,
 			metadata
@@ -74,11 +74,11 @@ export class LayerupSecurity {
 		return [maskedResponse.messages, unmaskResponse];
 	}
 
-	async logError(error: any, messages: any[], metadata: Metadata): Promise<any> {
+	async logError(error: any, messages: LLMMessage[], metadata: Metadata): Promise<any> {
 		return await this.functionManager.logError(error, messages, metadata);
 	}
 
-	async executeGuardrails(guardrails: string[], messages: any[], metadata: Metadata): Promise<any> {
+	async executeGuardrails(guardrails: string[], messages: LLMMessage[], metadata: Metadata): Promise<any> {
 		return await this.functionManager.executeGuardrails(
 			guardrails,
 			messages,
