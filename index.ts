@@ -2,7 +2,7 @@ import { setAPIKey, setBaseURL } from './config';
 import { Config, MaskedResponse, Metadata } from './types'
 import FunctionManager from './function-manager';
 
-class LayerupSecurity {
+export class LayerupSecurity {
 	private functionManager: FunctionManager;
 
 	constructor(config: Config) {
@@ -88,4 +88,3 @@ class LayerupSecurity {
 }
 
 export * from './types'
-export default LayerupSecurity;

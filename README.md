@@ -17,7 +17,7 @@ Grab your API key from [our dashboard](https://dashboard.uselayerup.com) and add
 ### Import and Configure
 
 ```javascript
-const LayerupSecurity = require('@layerup/layerup-security');
+const { LayerupSecurity } = require('@layerup/layerup-security');
 const layerup = new LayerupSecurity({ apiKey: process.env.LAYERUP_API_KEY });
 ```
 
