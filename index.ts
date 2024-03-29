@@ -1,5 +1,5 @@
 import { setAPIKey, setBaseURL } from './config';
-import { Config, LLMMessage, MaskedResponse, Metadata } from './types'
+import { Config, GuardrailResponse, LLMMessage, MaskedResponse, Metadata } from './types'
 import FunctionManager from './function-manager';
 
 export class LayerupSecurity {
@@ -78,12 +78,13 @@ export class LayerupSecurity {
 		return await this.functionManager.logError(error, messages, metadata);
 	}
 
-	async executeGuardrails(guardrails: string[], messages: LLMMessage[], metadata: Metadata): Promise<any> {
-		return await this.functionManager.executeGuardrails(
+	async executeGuardrails(guardrails: string[], messages: LLMMessage[], metadata: Metadata): Promise<GuardrailResponse> {
+		const guardrailResponse: GuardrailResponse = await this.functionManager.executeGuardrails(
 			guardrails,
 			messages,
 			metadata
 		);
+		return guardrailResponse
 	}
 }
 

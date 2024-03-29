@@ -23,3 +23,9 @@ export type LLMMessage = {
   role: string;
   content: string;
 }
+
+export type GuardrailResponse = {
+  all_safe: boolean;
+  offending_guardrail?: string;
+  canned_response?: LLMMessage;
+}
