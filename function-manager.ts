@@ -17,7 +17,7 @@ class FunctionManager {
       });
       return response;
     } catch (err: any) {
-      return err.response.data;
+      throw new Error(err.response?.data?.error || err.message);
     }
   }
 
@@ -30,7 +30,7 @@ class FunctionManager {
       });
       return response;
     } catch (err: any) {
-      return err.response.data;
+      throw new Error(err.response?.data?.error || err.message);
     }
   }
 
@@ -43,7 +43,7 @@ class FunctionManager {
       });
       return response;
     } catch (err: any) {
-      return err.response.data;
+      throw new Error(err.response?.data?.error || err.message);
     }
   }
 }

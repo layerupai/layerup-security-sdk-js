@@ -1,6 +1,6 @@
 {
   "name": "@layerup/layerup-security",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "JavaScript SDK for Layerup Security, an end-to-end application security suite built for LLMs.",
   "main": "dist/index.js",
   "scripts": {
