@@ -1,3 +1,5 @@
+import { ChatCompletionMessageParam } from "openai/resources";
+
 export interface Config {
 	apiKey: string;
 	baseURL?: string;
@@ -22,7 +24,7 @@ export type Metadata = {
 export type LLMMessage = {
   role: string;
   content: string;
-}
+} | ChatCompletionMessageParam;
 
 export type GuardrailResponse = {
   all_safe: boolean;
