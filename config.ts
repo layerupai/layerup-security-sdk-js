@@ -1,25 +1,20 @@
-// Default config
-const config = {
+import { Config } from "./types";
+
+const config: Config = {
 	apiKey: '',
 	baseURL: 'https://api.uselayerup.com/v1/',
 };
 
 // Function to set the API key
-function setAPIKey(key) {
+export function setAPIKey(key: string): void {
 	config.apiKey = key;
 }
 
-function setBaseURL(url) {
+export function setBaseURL(url: string): void {
 	config.baseURL = url;
 }
 
 // Function to get the current configuration
-function getConfig() {
+export function getConfig(): Config {
 	return config;
 }
-
-module.exports = {
-	setAPIKey,
-	setBaseURL,
-	getConfig,
-};
