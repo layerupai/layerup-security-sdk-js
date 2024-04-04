@@ -34,12 +34,12 @@ class FunctionManager {
     }
   }
 
-  async executeGuardrails(guardrails: string[], messages: LLMMessage[], metadata: Metadata): Promise<any> {
+  async executeGuardrails(guardrails: string[], messages: LLMMessage[], untrusted_input: string, metadata: Metadata): Promise<any> {
     try {
       const response = await this.apiClient.request({
         method: 'post',
         url: '/guardrails/execute',
-        data: JSON.stringify({ guardrails, messages, metadata }),
+        data: JSON.stringify({ guardrails, messages, untrusted_input, metadata }),
       });
       return response;
     } catch (err: any) {

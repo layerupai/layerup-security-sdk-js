@@ -78,10 +78,11 @@ export class LayerupSecurity {
 		return await this.functionManager.logError(error, messages, metadata);
 	}
 
-	async executeGuardrails(guardrails: string[], messages: LLMMessage[], metadata: Metadata): Promise<GuardrailResponse> {
+	async executeGuardrails(guardrails: string[], messages: LLMMessage[], untrusted_input: string, metadata: Metadata): Promise<GuardrailResponse> {
 		const guardrailResponse: GuardrailResponse = await this.functionManager.executeGuardrails(
 			guardrails,
 			messages,
+			untrusted_input,
 			metadata
 		);
 		return guardrailResponse
