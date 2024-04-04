@@ -8,7 +8,7 @@ class FunctionManager {
     this.apiClient = new APIClient();
   }
 
-  async maskPrompt(messages: LLMMessage[], metadata: Metadata): Promise<any> {
+  async maskPrompt(messages: LLMMessage[], metadata?: Metadata): Promise<any> {
     try {
       const response = await this.apiClient.request({
         method: 'post',
@@ -21,7 +21,7 @@ class FunctionManager {
     }
   }
 
-  async logError(error: any, messages: LLMMessage[], metadata: Metadata): Promise<any> {
+  async logError(error: any, messages: LLMMessage[], metadata?: Metadata): Promise<any> {
     try {
       const response = await this.apiClient.request({
         method: 'post',
@@ -34,7 +34,7 @@ class FunctionManager {
     }
   }
 
-  async executeGuardrails(guardrails: string[], messages: LLMMessage[], untrusted_input: string, metadata: Metadata): Promise<any> {
+  async executeGuardrails(guardrails: string[], messages: LLMMessage[], untrusted_input?: string, metadata?: Metadata): Promise<any> {
     try {
       const response = await this.apiClient.request({
         method: 'post',

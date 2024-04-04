@@ -29,7 +29,7 @@ export class LayerupSecurity {
 		this.functionManager = new FunctionManager();
 	}
 
-	async maskPrompt(messages: LLMMessage[], metadata: Metadata): Promise<[LLMMessage[], (templatedResponse: any) => any]> {
+	async maskPrompt(messages: LLMMessage[], metadata?: Metadata): Promise<[LLMMessage[], (templatedResponse: any) => any]> {
 		const maskedResponse: MaskedResponse = await this.functionManager.maskPrompt(
 			messages,
 			metadata
@@ -74,11 +74,11 @@ export class LayerupSecurity {
 		return [maskedResponse.messages, unmaskResponse];
 	}
 
-	async logError(error: any, messages: LLMMessage[], metadata: Metadata): Promise<any> {
+	async logError(error: any, messages: LLMMessage[], metadata?: Metadata): Promise<any> {
 		return await this.functionManager.logError(error, messages, metadata);
 	}
 
-	async executeGuardrails(guardrails: string[], messages: LLMMessage[], untrusted_input: string, metadata: Metadata): Promise<GuardrailResponse> {
+	async executeGuardrails(guardrails: string[], messages: LLMMessage[], untrusted_input?: string, metadata?: Metadata): Promise<GuardrailResponse> {
 		const guardrailResponse: GuardrailResponse = await this.functionManager.executeGuardrails(
 			guardrails,
 			messages,
