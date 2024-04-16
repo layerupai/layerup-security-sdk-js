@@ -1,6 +1,6 @@
 {
   "name": "@layerup/layerup-security",
-  "version": "1.5.9",
+  "version": "1.5.10",
   "description": "JavaScript SDK for Layerup Security, an end-to-end application security suite built for LLMs.",
   "main": "dist/index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "typescript": "^5.4.3"
   },
   "dependencies": {
-    "openai": "^4.30.0",
+    "openai": "^4.32.1",
     "axios": "^1.6.8"
   }
 }
