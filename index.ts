@@ -87,6 +87,19 @@ export class LayerupSecurity {
 		);
 		return guardrailResponse
 	}
+
+	escapePrompt(prompt: string, variables: { [key: string]: string }): string {
+		let escapedPrompt = prompt;
+		Object.keys(variables).forEach((key) => {
+			const startString = `<START ${key}>`;
+			const endString = `<END ${key}>`;
+			const untrustedInput = variables[key];
+			const escapedInput = untrustedInput.replaceAll(startString, '').replaceAll(endString, '');
+			const variableReplacement = `\n${startString}\n${escapedInput}\n${endString}\n`;
+			escapedPrompt = escapedPrompt.replaceAll(`[%${key}%]`, variableReplacement);
+		})
+		return escapedPrompt;
+	}
 }
 
 export * from './types'
